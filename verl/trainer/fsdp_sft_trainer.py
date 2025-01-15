@@ -179,8 +179,10 @@ class FSDPSFTTrainer(object):
                     'task_type': TaskType.CAUSAL_LM,
                     'r': self.config.model.lora_rank,
                     'lora_alpha': self.config.model.lora_alpha,
-                    'target_modules': convert_to_regular_types(self.config.model.target_modules),
-                    'bias': "none"
+                    'target_modules': convert_to_regular_types(self.config.model.lora_target_modules),
+                    'bias': "none",
+                    "lora_dropout": self.config.model.lora_dropout
+
                 }
                 self.model = get_peft_model(self.model, LoraConfig(**lora_config))
 

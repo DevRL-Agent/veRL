@@ -30,6 +30,9 @@ torchrun --standalone --nnodes=1 --nproc_per_node=$nproc_per_node \
     trainer.total_epochs=5 \
     trainer.logger=['console','wandb'] \
     trainer.default_hdfs_dir=null $@ \
-    +model.lora_rank=32\
+    +model.lora_rank=32 \
     +model.lora_alpha=16 \
-    +model.target_modules=[q_proj,v_proj] \
+    +model.lora_target_modules=all-linear \
+    +model.lora_dropout=0.1 
+
+    # +model.lora_target_modules=[q_proj,v_proj]
